@@ -1,7 +1,7 @@
 
 class Oystercard
 attr_reader :balance
-attr_reader :card_in_user
+attr_reader :card_in_use
 
 MAX_BALANCE = 90
 
