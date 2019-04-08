@@ -20,4 +20,11 @@ describe Oystercard do
       end
     end
   end
+
+  describe '#deduct' do
+    it "subtracts the journey amount from the balance" do
+      subject.top_up(50)
+      expect { subject.deduct(10) }.to change{ subject.balance }.by -10
+    end
+  end
 end
