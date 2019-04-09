@@ -29,8 +29,13 @@ describe Oystercard do
   end
 
   describe '#in_journey?' do
+    it "at card creation should return false" do
+      expect(subject).not_to be_in_journey
+    end
+
     context 'when touched in' do
       it "returns true" do
+        subject.top_up(10)
         subject.touch_in
         expect(subject).to be_in_journey
       end
@@ -38,8 +43,18 @@ describe Oystercard do
 
     context 'when touched out' do
       it "returns false" do
+        subject.top_up(10)
+        subject.touch_in
         subject.touch_out
         expect(subject).not_to be_in_journey
+      end
+    end
+  end
+
+  describe '#touch_in' do
+    context 'when balance is below minimum balance' do
+      it "raises an error" do
+        expect { subject.touch_in }.to raise_error "Balance below minimum"
       end
     end
   end

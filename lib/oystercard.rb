@@ -4,6 +4,7 @@ attr_reader :balance
 attr_reader :card_in_use
 
 MAX_BALANCE = 90
+MIN_BALANCE = 1
 
   def initialize(balance = 0)
     @balance = balance
@@ -20,6 +21,7 @@ MAX_BALANCE = 90
   end
 
   def touch_in
+    fail "Balance below minimum" if @balance < MIN_BALANCE
     @card_in_use = true
   end
 
