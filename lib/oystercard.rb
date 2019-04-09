@@ -10,6 +10,7 @@ MIN_CHARGE = -3
   def initialize(balance = 0)
     @balance = balance
     @card_in_use = false
+    @entry_station = nil
   end
 
   def top_up(amount)
@@ -17,9 +18,10 @@ MIN_CHARGE = -3
     @balance += amount
   end
 
-  def touch_in
+  def touch_in(station)
     fail "Balance below minimum" if @balance < MIN_BALANCE
     @card_in_use = true
+    @entry_station = station
   end
 
   def touch_out
