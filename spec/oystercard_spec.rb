@@ -38,7 +38,7 @@ describe Oystercard do
 
     context 'when touched in' do
       it "returns true" do
-        subject.top_up(10)
+        subject.top_up(Oystercard::MIN_CHARGE)
         subject.touch_in(station)
         expect(subject).to be_in_journey
       end
@@ -46,7 +46,7 @@ describe Oystercard do
 
     context 'when touched out' do
       it "returns false" do
-        subject.top_up(10)
+        subject.top_up(Oystercard::MIN_CHARGE)
         subject.touch_in(station)
         subject.touch_out
         expect(subject).not_to be_in_journey
@@ -63,7 +63,7 @@ describe Oystercard do
 
     context 'when balance is above minimum balance' do
       it 'records the station' do
-        subject.top_up(10)
+        subject.top_up(Oystercard::MIN_CHARGE)
         expect(subject.touch_in(station)).to eq station
       end
     end
@@ -71,9 +71,9 @@ describe Oystercard do
 
   describe '#touch_out' do
     it 'deducts the journey cost from the balance' do
-      subject.top_up(10)
+      subject.top_up(Oystercard::MIN_CHARGE)
       subject.touch_in(station)
-      expect {subject.touch_out}.to change{subject.balance}.by Oystercard::MIN_CHARGE
+      expect {subject.touch_out}.to change{subject.balance}.by -Oystercard::MIN_CHARGE
     end
   end
 

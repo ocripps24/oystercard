@@ -5,7 +5,7 @@ attr_reader :entry_station
 
 MAX_BALANCE = 90
 MIN_BALANCE = 1
-MIN_CHARGE = -3
+MIN_CHARGE = 3
 
   def initialize(balance = 0)
     @balance = balance
@@ -23,11 +23,12 @@ MIN_CHARGE = -3
   end
 
   def touch_out
-    deduct(-MIN_CHARGE)
+    deduct(MIN_CHARGE)
     @entry_station = nil
   end
 
   def in_journey?
+    # !!entry_station
     if @entry_station == nil
       return false
     else
