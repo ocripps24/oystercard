@@ -2,9 +2,11 @@ require 'Oystercard'
 
 describe Oystercard do
 
-  let(:in_station) { double :in_station }
-  let(:out_station) { double :out_station }
-  let(:journey) { {in_station: in_station, out_station: out_station} }
+  let(:in_station)    { double :in_station }
+  let(:out_station)   { double :out_station }
+  let(:entry_station) { double :entry_station }
+  let(:exit_station)  { double :exit_station }
+  let(:journey)       { { entrance: entry_station, exit: exit_station } }
 
   context 'when initialized' do
     it "checks journey log is empty" do
@@ -14,8 +16,8 @@ describe Oystercard do
 
   it "stores a journey" do
     subject.top_up(Oystercard::MIN_CHARGE)
-    subject.touch_in(in_station)
-    subject.touch_out(out_station)
+    subject.touch_in(entry_station)
+    subject.touch_out(exit_station)
     expect(subject.journies).to include journey
   end
 

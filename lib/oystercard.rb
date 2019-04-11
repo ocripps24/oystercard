@@ -25,17 +25,14 @@ MIN_CHARGE = 3
     fail "Balance below minimum" if @balance < MIN_BALANCE
     @entry_station = in_station
     @exit_station = nil
-    # journey = { entrance: in_station}
-    # journey[]
-    # @journies << journey
   end
 
   def touch_out(out_station)
     deduct(MIN_CHARGE)
-    @entry_station = nil
     @exit_station = out_station
-    # @journey = {}
-    # @journey[exit_station] = out_station
+    journey = { entrance: entry_station, exit: exit_station }
+    @journies << journey
+    @entry_station = nil
   end
 
   def in_journey?
